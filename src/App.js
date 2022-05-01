@@ -4,7 +4,6 @@ import ContactList from './ContactList';
 import Contact from "./Contact";
 import contacts from "./contacts";
 
-import GoogleSheetsProvider from 'react-db-google-sheets';
 import {useState} from "react";
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
   }).map((contact) => (
     <Contact key={contact.id} {...contact} />
   ));
-
 
   return (
     <div>
