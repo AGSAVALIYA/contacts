@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = ({name, work}) => {
+const Contact = ({name, work, id}) => {
   return (
     <div className="contact">
       <div style={{marginRight: "15px"}}>
@@ -8,6 +8,7 @@ const Contact = ({name, work}) => {
       </div>
       <div>
       <p>Work:<span style={{fontWeight: "600"}}> {work} </span></p>
+      <p>ID: {id}</p>
       </div>
     </div>
   );
