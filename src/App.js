@@ -4,6 +4,7 @@ import Contact from "./Contact";
 import {useEffect, useState} from "react";
 import { Outlet } from 'react-router-dom';
 import app from "./firebase";
+import AddContact from './AddContact';
 import { getDatabase, ref, child, get } from "firebase/database";
 
 
@@ -16,7 +17,7 @@ function App() {
    const dbRef = ref(getDatabase());
    get(child(dbRef, "contacts")).then((snapshot) => {
       if (snapshot.exists()) {
-        setContacts(snapshot.val());
+        setContacts(snapshot.val().sort((a, b) => a.name.localeCompare(b.name)));
       } else {
         console.log("No data available");
       }
@@ -26,6 +27,7 @@ function App() {
   );
   
   }, []);
+  
   
   const CL = contacts.filter((contact) => {
     if (search === "") {
@@ -42,6 +44,7 @@ function App() {
     <div>
       <input className="search-bar" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
       <ContactList CL={CL}/>
+      <AddContact />
       <Outlet/>
     </div>
   );
