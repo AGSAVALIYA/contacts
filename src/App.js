@@ -5,6 +5,7 @@ import Contact from "./Contact";
 import contacts from "./contacts";
 
 import {useState} from "react";
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [search, setSearch] = useState("");
@@ -26,6 +27,7 @@ function App() {
     <div>
       <input className="search-bar" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
       <ContactList CL={CL}/>
+      <Outlet/>
     </div>
   );
 }

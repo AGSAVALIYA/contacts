@@ -3,11 +3,6 @@ body{
   text-align: center;
 }
 
-.contact-list{
-  margin: auto;
-  padding: 20px;
-}
-
 .contact:hover{
   transform: scale(1.03);
 }
@@ -19,30 +14,43 @@ body{
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.363);
   height: 20px;
+  width: 350px;
   color: white;
 }
 .search-bar::placeholder{
   color: rgba(255, 255, 255, 0.795);
 }
-.my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex; /* gutter size offset */
+.contact-list {
+  display: -webkit-box; 
+  display: -ms-flexbox;
+  display: flex;
   width: auto;
+  margin: auto;
+  padding: 20px;
 }
-.my-masonry-grid_column {
+.contact-list-column {
   background-clip: padding-box;
 }
 
-
-/* Style your items */
-.my-masonry-grid_column > .contact { /* change div to reference your elements you put in <Masonry> */
+.contact-list-column > .contact { 
   background-color: rgba(255, 255, 255, 0.363);
   color: white;
   border-radius: 15px;
   padding: 10px;
   margin: 0 8px 8px 0;
   transition: 0.3s;
-  display: flex;
 }
 
+.contact-info{
+  margin:250px auto auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.582);
+  color: rgb(0, 0, 0);
+  width: 200px;
+}
+.modal {
+  background: rgba(0, 0, 0, 0.233) !important;
+  backdrop-filter: blur(7px);
+}

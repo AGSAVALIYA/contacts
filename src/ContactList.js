@@ -13,15 +13,13 @@ const ContactList = ({CL}) => {
   };
 
   return (
-    <div className="contact-list">
       <Masonry
         breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
+        className="contact-list"
+        columnClassName="contact-list-column"
       >
         {CL}
       </Masonry>
-    </div>
   );
 };
 
