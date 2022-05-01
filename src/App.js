@@ -1,17 +1,32 @@
-
 import './App.css';
 import ContactList from './ContactList';
 import Contact from "./Contact";
-import contacts from "./contacts";
-
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { Outlet } from 'react-router-dom';
+import app from "./firebase";
+import { getDatabase, ref, child, get } from "firebase/database";
+
+
 
 function App() {
   const [search, setSearch] = useState("");
-  // const CL = contacts.map((contact) => (
-  //   <Contact key={contact.id} {...contact} />
-  // ));
+  const [contacts, setContacts] = useState([]);
+
+ useEffect(() => {
+   const dbRef = ref(getDatabase());
+   get(child(dbRef, "contacts")).then((snapshot) => {
+      if (snapshot.exists()) {
+        setContacts(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    }
+  );
+  
+  }, []);
+  
   const CL = contacts.filter((contact) => {
     if (search === "") {
       return contacts.map((contact) => (
