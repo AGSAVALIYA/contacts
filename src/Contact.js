@@ -4,7 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import Popup from 'reactjs-popup';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import ContactEdit from "./ContactInfo";
+import ContactInfo from "./ContactInfo";
 
 
 const Contact = ({name, work, id, location}) => {

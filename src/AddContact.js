@@ -3,28 +3,27 @@ import Popup from "reactjs-popup";
 import app from "./firebase";
 import { getDatabase, ref, child, push, update, set } from "firebase/database";
 
-const AddContact = () => {
+const AddContact = (cl) => {
     const [name, setName] = React.useState("");
     const [work, setWork] = React.useState("");
     const [number, setNumber] = React.useState("");
     const [location, setLocation] = React.useState("");
     const [contacts, setContacts] = React.useState([]);
-    
-   
-  //add object to firebase
-  // const addContact = () => {
-  //   const dbRef = ref(getDatabase());
-  //   push(child(dbRef, "contacts"), {
-  //     name: name,
-  //     work: work,
-  //     number: number,
-  //     location: location
-  //   }).then(() => {
-  //     console.log("Contact added");
-  //   }).catch((error) => {
-  //     console.error(error);
-  //   });
-  // };
+  
+  const addContact = () => {
+    const dbRef = ref(getDatabase());
+    update(child(dbRef, `contacts/${Object.values(cl)[0]}`), {
+      name: name,
+      work: work,
+      number: number,
+      location: location,
+      id: parseInt(Object.values(cl)[0]),
+    }).then(() => {
+      console.log("Contact added");
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
 
 
     
@@ -46,7 +45,7 @@ const AddContact = () => {
                 <input type="text" name="number" onChange={(e)=>setNumber(e.target.value)}/>
                 <label>Location</label>
                 <input type="text" name="location" onChange={(e)=>setLocation(e.target.value)}/>
-                <button >Submit</button>
+                <button onClick={addContact}>Submit</button>
             </form>    
         </div>
       </Popup>

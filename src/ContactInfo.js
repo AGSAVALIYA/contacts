@@ -1,13 +1,11 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useParams, Outlet, useNavigate  } from "react-router-dom";
-import contacts from "./contacts";
 import Modal from 'react-modal';
 import { useSwipeable, UP, DOWN, SwipeEventData } from 'react-swipeable';
+import { getDatabase, ref, child, get } from "firebase/database";
 
 
-function getContacts(id) {
-    return contacts.find(contact => contact.id === id);
-  }
+
   const modalStyle = {
     position: "fixed",
     left: 0,
@@ -20,34 +18,68 @@ function getContacts(id) {
   };
   
 
-const ContactEdit = () => {
+const ContactInfo = () => {
     let params = useParams();
-    let contact = getContacts(parseInt(params.id));
+    const [contacts , setContacts] = useState([]);
+    const [contact, setContact] = useState([]);
+    const [cl, setCl] = useState(null);
+    
     const navigate = useNavigate();
-    /* jshint ignore:start */
-   const handleSwipe = (event: SwipeEventData) => {
+   const currContact = parseInt(params.id);
+    //get contacts from firebase and set contact to the one that matches the id
+    useEffect(() => {
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, "contacts")).then((snapshot) => {
+              if (snapshot.exists()) {
+                setContacts(snapshot.val());
+                setContact(snapshot.child(`${currContact}`).val());
+                setCl(snapshot.val().length);
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            }
+        );
+    }, []);
+    console.log(cl);
 
+  
+  
+  
+    const handleSwipe = (event: SwipeEventData) => {
     if (event.dir === DOWN) {
         navigate(`/`);
     }
     };
-    /* jshint ignore:end */
-    const numm = contacts.length;
-    console.log(numm);
     const swipeable = useSwipeable({
         onSwipedLeft: () => {
-            navigate(`/${contact.id + 1}`);
-            if (contact.id === numm) {
-                navigate(`/${1}`);
+            setContact(contacts[currContact]);
+            
+            setContact(contacts[params.id]);
+            if (currContact === cl - 1) {
+                navigate(`/${0}`);
+            }else{
+                let np =  currContact + 1;
+                navigate(`/${np}`);
             }
         },
         onSwipedRight: () => {  
-            navigate(`/${contact.id - 1}`);
-            if (contact.id === 1) {
-                navigate(`/${numm}`);
+            setContact(contacts[currContact]);
+           
+            if (currContact === 0) {
+                navigate(`/${cl-1}`);
+            }else{
+                let np = currContact - 1;
+                navigate(`/${np}`);
             }
             
         },
+        //on Swipe Up make a phone call
+        onSwipedUp: () => {
+            window.open(`tel:${contact.number}`);
+        },
+
         preventDefaultTouchmoveEvent: false,
         trackMouse: true,
         trackTouch: true,
@@ -58,7 +90,6 @@ const ContactEdit = () => {
         <div  style={{width: "100%", height:"100%", position:"absolute", zIndex: "-1"}}   onClick={()=>{navigate("/")}}></div>   
 <div className="contact-info" style={{zIndex:"1000"}}>
         <h1>Contact Info</h1>
-        <p>Contact ID: {params.id}</p>
         <p>Name: {contact.name}</p>
         <p>Work: {contact.work}</p>
         <p>Number:<a href={`tel:${contact.number}`}> {contact.number}</a></p>
@@ -66,4 +97,4 @@ const ContactEdit = () => {
         </div>
     );
     }
-export default ContactEdit;
+export default ContactInfo;

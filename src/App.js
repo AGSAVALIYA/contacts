@@ -11,13 +11,15 @@ import { getDatabase, ref, child, get } from "firebase/database";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [cl , setCl] = useState(null);
   const [contacts, setContacts] = useState([]);
 
  useEffect(() => {
    const dbRef = ref(getDatabase());
    get(child(dbRef, "contacts")).then((snapshot) => {
       if (snapshot.exists()) {
-        setContacts(snapshot.val().sort((a, b) => a.name.localeCompare(b.name)));
+        setContacts(snapshot.val());
+        setCl(parseInt(snapshot.val().length));
       } else {
         console.log("No data available");
       }
@@ -27,8 +29,7 @@ function App() {
   );
   
   }, []);
-  
-  
+  console.log("cl from app",cl);
   const CL = contacts.filter((contact) => {
     if (search === "") {
       return contacts.map((contact) => (
@@ -44,7 +45,7 @@ function App() {
     <div>
       <input className="search-bar" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
       <ContactList CL={CL}/>
-      <AddContact />
+      <AddContact cl={cl}/>
       <Outlet/>
     </div>
   );
