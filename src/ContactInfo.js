@@ -77,13 +77,17 @@ const ContactInfo = () => {
         },
         //on Swipe Up make a phone call
         onSwipedUp: () => {
-            window.open(`tel:${contact.number}`);
+            window.location.href = `https://wa.me/+91${contact.number}`;
+        },
+        onSwipedDown: () => {
+            window.location.href = `https://wa.me/+91${contact.number}`;
         },
 
         preventDefaultTouchmoveEvent: false,
         trackMouse: true,
         trackTouch: true,
     });
+    
 
     return (
        <div style={modalStyle} className="modal" {...swipeable}>
