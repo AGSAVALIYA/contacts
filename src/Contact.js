@@ -21,7 +21,7 @@ const Contact = ({name, number, id, work}) => {
       <p> Name:<span style={{fontWeight: "600"}}> {name} </span></p>
       </div>
       <div>
-      <p onClick={Call}>Number:<span style={{fontWeight: "600"}}> {number} </span></p>
+      <p>Number:<span style={{fontWeight: "600"}}> {number} </span></p>
       <p>Work:<span style={{fontWeight: "500"}}> {work} </span></p>
       </div>
       
