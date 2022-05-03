@@ -77,10 +77,10 @@ const ContactInfo = () => {
         },
         //on Swipe Up make a phone call
         onSwipedUp: () => {
-            window.location.href = `https://wa.me/+91${contact.number}`;
+            window.location.href = `whatsapp://send?phone=91${contact.number}`;
         },
         onSwipedDown: () => {
-            window.location.href = `https://wa.me/+91${contact.number}`;
+            window.location.href = `whatsapp://send?phone=91${contact.number}`;
         },
 
         preventDefaultTouchmoveEvent: false,
