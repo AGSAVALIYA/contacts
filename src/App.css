@@ -68,3 +68,12 @@ body{
   backdrop-filter: blur(5px);
   color: rgb(255, 255, 255);
 }
+
+.pin-input{
+  background-color: rgba(255, 255, 255, 0.363);
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.pin-input::placeholder{
+  color: rgb(255, 255, 255);
+}
