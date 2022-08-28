@@ -1,9 +1,9 @@
 import './App.css';
 import ContactList from './ContactList';
-import Contact from "./Contact";
+import Contact from "./Componenets/Contact";
 import {useEffect, useState} from "react";
 import { Outlet } from 'react-router-dom';
-import app from "./firebase";
+import app from "./firebase/firebase";
 import AddContact from './AddContact';
 import { getDatabase, ref, child, get } from "firebase/database";
 

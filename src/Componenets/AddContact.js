@@ -1,6 +1,6 @@
 import React from "react";
 import Popup from "reactjs-popup";
-import app from "./firebase";
+import app from "../firebase/firebase";
 import { getDatabase, ref, child, push, update, set } from "firebase/database";
 
 const AddContact = (cl) => {

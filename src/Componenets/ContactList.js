@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Masonry from "react-masonry-css";
 import Contact from "./Contact";
-import App from './App';
+import App from '../App';
 
 const ContactList = ({CL}) => {
   
