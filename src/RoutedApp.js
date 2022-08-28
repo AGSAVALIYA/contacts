@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import ContactInfo from './ContactInfo';
 import App from './App';
+import ContactInfo from "./Componenets/ContactInfo";
 
 const RoutedApp = () => {
     return (

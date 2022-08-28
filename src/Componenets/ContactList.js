@@ -11,6 +11,7 @@ const ContactList = ({CL}) => {
     700: 2,
     500: 2,
   };
+  console.log("CLllllll",CL);
 
   return (
       <Masonry
